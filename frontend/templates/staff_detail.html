@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+    {% load static %}
+
+    {% block title %}{{ staff_member.name }} - Your Hospital Name{% endblock %}
+
+    {% block content %}
+        <section class="section">
+            <h2 class="section-title">{{ staff_member.name }}</h2>
+            <div class="staff-profile">
+                {% if staff_member.image %}
+                    <img src="{{ staff_member.image.url }}" alt="{{ staff_member.name }}" class="staff-image">
+                {% else %}
+                    <img src="{% static 'images/doctor_placeholder.png' %}" alt="Placeholder Staff" class="staff-image">
+                {% endif %}
+                <p><strong>Designation:</strong> {{ staff_member.designation }}</p>
+                {% if staff_member.specialization %}
+                    <p><strong>Specialization:</strong> {{ staff_member.specialization }}</p>
+                {% endif %}
+                {% if staff_member.department %}
+                    <p><strong>Department:</strong> {{ staff_member.department }}</p>
+                {% endif %}
+                {% if staff_member.qualifications %}
+                    <p><strong>Qualifications:</strong> {{ staff_member.qualifications|linebreaksbr }}</p>
+                {% endif %}
+                {% if staff_member.bio %}
+                    <h3>Biography</h3>
+                    <p>{{ staff_member.bio|linebreaksbr }}</p>
+                {% endif %}
+                <a href="{% url 'consultants' %}" class="btn">Back to Our Team</a>
+            </div>
+        </section>
+    {% endblock %}
+
+    {% block styles %}
+        <style>
+            .staff-profile {
+                display: flex;
+                gap: 20px;
+                align-items: flex-start;
+            }
+            .staff-image {
+                max-width: 200px;
+                height: auto;
+                border-radius: 5px;
+            }
+        </style>
+    {% endblock %}

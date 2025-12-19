@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - Your Hospital Name{% endblock %}
+
+{% block content %}
+<div class="page-container" style="max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333;">
+    <div class="page-header" style="text-align: center; margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 2px solid #e0e0e0;">
+        <h1 style="font-size: 2.5rem; color: #2a6496; margin-bottom: 1rem;">About MediCare Hospital</h1>
+        <p class="subtitle" style="font-size: 1.1rem; max-width: 900px; margin: 0 auto; color: #555; color: black; font-size:20px;">
+            Medicare Hospital – A Legacy of Care Since 1995
+
+            Established in 1995, Medicare Hospital has been a trusted name in quality healthcare for over two decades. With a strong foundation built on compassion, excellence, and innovation, the hospital has consistently provided comprehensive medical services to the community.
+            
+            From its early days, Medicare Hospital has grown into a multi-specialty healthcare institution, equipped with advanced medical technology and a team of experienced doctors, nurses, and support staff. The hospital offers a wide range of services, including general medicine, surgery, pediatrics, obstetrics and gynecology, orthopedics, cardiology, and emergency care.
+            
+            With a patient-centric approach, Medicare Hospital is committed to delivering high standards of treatment, personalized care, and ethical medical practices. Over the years, it has earned the trust of thousands of patients through its unwavering dedication to health and wellness.
+            
+            Medicare Hospital continues to evolve, adapting to modern advancements while staying true to its mission of "Caring with Compassion, Healing with Excellence."
+        </p>
+    </div>
+
+    <div class="about-content" style="display: grid; grid-template-columns: 1fr; gap: 2.5rem; margin-top: 2rem;">
+        <section class="mission" style="background: #f0f7fd; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 4px solid #2a6496; color: black; font-size: 20px;">
+            <h2 style="color: #2a6496; font-size: 1.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e0e0e0;">Our Mission</h2>
+            <p style="font-size: 1rem; color: #444; margin-bottom: 1rem;">
+                At Medicare Hospital, our mission is to provide compassionate, high-quality, and accessible healthcare to every patient. We are committed to healing with empathy, advancing medical excellence through continuous learning, and serving our community with integrity and respect.
+
+                We strive to create a safe, supportive environment where patients receive personalized care, staff are empowered to deliver their best, and innovation leads the way in improving lives.
+            </p>
+        </section>
+
+        <section class="history" style="background: #f0f7fd; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 4px solid #666; color: black; font-size: 20px;">
+            <h2 style="color: #2a6496; font-size: 1.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e0e0e0;">Our History</h2>
+            <p style="font-size: 1rem; color: #444; margin-bottom: 1rem;">
+                Medicare Hospital was founded in 1995 with a vision to offer reliable and affordable healthcare to the community. What began as a modest healthcare center has steadily grown into a respected multi-specialty hospital, known for its commitment to quality and compassionate care.
+
+                In its early years, the hospital focused on essential medical services, gradually expanding its facilities and departments in response to growing patient needs. With the addition of specialized units, modern equipment, and skilled professionals, Medicare Hospital became a trusted name in the region's healthcare landscape.
+                
+                Over the years, the hospital has embraced medical advancements and introduced new technologies to enhance diagnosis, treatment, and patient outcomes. Today, it stands as a symbol of progress and dedication, proudly serving thousands of patients each year with integrity and care.
+            </p>
+        </section style=style ="background: #f0f7fd; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; border-left: 4px solid #4CAF50; color: black; font-size: 20px;">
+        {% if achievements %}
+        <h2 style="color: #2a6496; font-size: 1.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e0e0e0;">Our Achievements</h2>
+        <ul style="font-size: 1rem; color: #444; margin-bottom: 1.5rem;">
+            {% for achievement in achievements %}
+            <li>{{ achievement.title }} {% if achievement.year %} ({{ achievement.year }}) {% endif %} - {{ achievement.description }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        </section>
+{% endblock %}

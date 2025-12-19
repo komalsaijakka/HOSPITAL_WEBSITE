@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ service.name }} - Our Services{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <h2 class="section-title">{{ service.name }}</h2>
+        {% if service.image %}
+            <img src="{{ service.image.url }}" alt="{{ service.name }}" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+        {% endif %}
+        <p>{{ service.description|linebreaksbr }}</p>
+        <a href="{% url 'services' %}" class="btn">Back to Services</a>
+    </section>
+{% endblock %}

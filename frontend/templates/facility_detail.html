@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ facility.name }} - Our Facilities{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <h2 class="section-title">{{ facility.name }}</h2>
+        {% if facility.image %}
+            <img src="{{ facility.image.url }}" alt="{{ facility.name }}" style="max-width: 100%; height: auto; margin-bottom: 20px;">
+        {% endif %}
+        <p>{{ facility.description|linebreaksbr }}</p>
+        <a href="{% url 'facilities' %}" class="btn">Back to Facilities</a>
+    </section>
+{% endblock %}

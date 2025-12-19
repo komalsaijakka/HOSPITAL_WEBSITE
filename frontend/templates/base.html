@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MediCare{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <header style="background-color: beige;">
+        <div class="container">
+            <div class="logo">
+                <a href="{% url 'main' %}">
+                    <img src="{% static 'images/logo.webp' %}" alt="Your Hospital Logo" style="width: 40%;">
+                </a>
+            </div>
+            <nav>
+                <ul >
+                    <li><a href="{% url 'main' %}" style="color: #f08673; font-weight: bold;">Home</a></li>
+                    <li><a href="{% url 'services' %}" style="color: #ff2700; font-weight: bold;">Services</a></li>
+                    <li><a href="{% url 'facilities' %}" style="color: #ff2700; font-weight: bold;">Facilities</a></li>
+                    <li><a href="{% url 'consultants' %}" style="color: #ff2700; font-weight: bold;">Consultants</a></li>
+                    <li><a href="{% url 'about_us' %}" style="color: #ff2700; font-weight: bold;">About Us</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'appointment' %}" style="color: #ff2700; font-weight: bold;">Book Appointment</a></li>
+                        <li><a href="{% url 'appointment_history' %}" style="color: #ff2700; font-weight: bold;">My Appointments</a></li>
+                        <li><a href="{% url 'logout' %}" style="color: #ff2700; font-weight: bold;">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'signup' %}" style="color: #ff2700; font-weight: bold;">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}" style="color: #ff2700; font-weight: bold;">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; {% now "Y" %} MediCare. All rights reserved.</p>
+            <a href="tel:8179062011">Contact Us   :8179062011</a>
+        </div>
+            <a href="mailto:tejainumula05@gmail.com">Send Mail :tejainumula05@gmail.com</a>
+        <script src="{% static 'js/script.js' %}"></script>
+    </footer> 
+</body>
+</html>

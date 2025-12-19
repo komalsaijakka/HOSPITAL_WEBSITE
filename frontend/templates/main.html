@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home-Medicare{% endblock %}
+
+{% block content %}
+    <section class="hero" style="background-image: url('{% static 'images/hero_bg.jpg' %}') ; ">
+        <div class="hero-content">
+            <h1>Welcome to Medi Care</h1>
+            <p>Providing quality healthcare for you and your family.</p>
+            <a href="{% url 'appointment' %}" class="btn">Book an Appointment</a>
+        </div>
+    </section>
+
+    <section class="section"  style="background-color: #008080">
+        <h2 class="section-title">Key Specialities</h2>
+        <div class="card-grid">
+            {% for speciality in specialities %}
+            <div class="card">
+                <h3>{{ speciality.name }}</h3>
+                <p class="short-text">{{ speciality.description|truncatewords:20 }}</p>
+                <p class="full-text" style="display: none;">{{ speciality.description }} <a href="{% url 'speciality_detail' speciality.id %}">Learn More</a></p>
+                <a href="#" class="read-more">Read More</a>
+            </div>
+            {% empty %}
+                <p>No specialities listed yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="section"  style="background-color: #008080">
+        <h2 class="section-title">Therapies</h2>
+        <div class="card-grid">
+            {% for therapy in therapies %}
+            <div class="card">
+                <h3>{{ therapy.name }}</h3>
+                <p>{{ therapy.description|truncatewords:20 }} <a href="#">Learn More</a></p>
+            </div>
+            {% empty %}
+                <p>No therapies listed yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="section search-bar"  style="background-color: #008080 ; margin-bottom: 0%;">
+        <h2>Search  Departments, Services , Therapies</h2>
+        <form method="get" action="{% url 'search' %}">
+            <input type="text" name="q" placeholder="Enter your search term..." value="{{ query|default:'' }}">
+            <button type="submit">Search</button>
+        </form>
+        {% if search_results %}
+            <h3>Search Results for "{{ query }}"</h3>
+            <ul>
+                {% for result in search_results %}
+                    <li>
+                        {% if result.search_type == 'Doctor' %}
+                            <a href="{% url 'staff_detail' result.id %}">{{ result.name }} ({{ result.search_type }})</a>
+                        {% elif result.search_type == 'Speciality' %}
+                            <a href="{% url 'speciality_detail' result.id %}">{{ result.name }} ({{ result.search_type }})</a>
+                        {% elif result.search_type == 'Therapy' %}
+                            {{ result.name }} ({{ result.search_type }})
+                        {% else %}
+                            {{ result.name }} (Unknown Type)
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    <li>No results found.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </section>
+
+    <section class="section"  style="background-color: #008080">
+        <h2 class="section-title">Our Doctors</h2>
+        <div class="consultant-list">
+            {% for doctor in doctors %}
+            <div class="consultant-card">
+                {% if doctor.image %}
+                    <img src="{{ doctor.image.url }}" alt="{{ doctor.name }}">
+                {% else %}
+                    <img src="{% static 'images/doctor_placeholder.png' %}" alt="Placeholder Doctor">
+                {% endif %}
+                <h4><a href="{% url 'staff_detail' doctor.id %}">{{ doctor.name }}</a></h4>
+                <p>{{ doctor.specialization }}</p>
+                <p>{{ doctor.bio|truncatewords:15 }} <a href="{% url 'staff_detail' doctor.id %}">Read More</a></p>
+            </div>
+            {% empty %}
+                <p>No doctors listed yet.</p>
+            {% endfor %}
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="{% url 'consultants' %}" class="btn">View All Consultants</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

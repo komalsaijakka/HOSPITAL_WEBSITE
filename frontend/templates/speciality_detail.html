@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ speciality.name }} - Our Specialities{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <h2 class="section-title">{{ speciality.name }}</h2>
+        <p>{{ speciality.description|linebreaksbr }}</p>
+
+        <h3>Our Doctors in {{ speciality.name }}</h3>
+        <div class="consultant-list">
+            {% for doctor in doctors %}
+                {% include 'partials/staff_card.html' with staff_member=doctor %}
+            {% empty %}
+                <p>No doctors currently listed in this speciality.</p>
+            {% endfor %}
+        </div>
+        <a href="{% url 'main' %}" class="btn">Back to Home</a>
+    </section>
+{% endblock %}

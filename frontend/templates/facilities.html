@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Facilities - Your Hospital Name{% endblock %}
+
+{% block content %}
+    <section class="section"  style="background-color: #654321">
+        <h2 class="section-title">Our Facilities</h2>
+        <div class="card-grid">
+            {% for facility in facilities %}
+            <div class="card">
+                <h3><a href="{% url 'facility_detail' facility.id %}">{{ facility.name }}</a></h3>
+                {% if facility.image %}
+                    <img src="{{ facility.image.url }}" alt="{{ facility.name }}" style="max-width: 100%; height: auto;">
+                {% endif %}
+                <p>{{ facility.description }}</p>
+            </div>
+            {% empty %}
+                <p>No facilities listed yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

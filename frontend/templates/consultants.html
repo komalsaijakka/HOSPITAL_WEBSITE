@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+    {% load static %}
+
+    {% block title %}Our Medical Team - Your Hospital Name{% endblock %}
+
+    {% block content %}
+        <section class="section" style="background-color: #36454f">
+            <h2 class="section-title">Our Doctors</h2>
+            <div class="consultant-list">
+                {% for doctor in doctors %}
+                {% include 'partials/staff_card.html' with staff_member=doctor %}
+                {% empty %}
+                    <p>No doctors listed yet.</p>
+                {% endfor %}
+            </div>
+
+            <h2 class="section-title">Surgical Residents</h2>
+            <div class="consultant-list">
+                {% for resident in residents %}
+                {% include 'partials/staff_card.html' with staff_member=resident %}
+                {% empty %}
+                    <p>No surgical residents listed yet.</p>
+                {% endfor %}
+            </div>
+
+            <h2 class="section-title">Our Nursing Staff</h2>
+            <div class="consultant-list">
+                {% for nurse in nurses %}
+                {% include 'partials/staff_card.html' with staff_member=nurse %}
+                {% empty %}
+                    <p>No nursing staff listed yet.</p>
+                {% endfor %}
+            </div>
+        </section>
+    {% endblock %}

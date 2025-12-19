@@ -1,0 +1,11 @@
+{% load static %}
+<div class="consultant-card">
+    {% if staff_member.image %}
+        <img src="{{ staff_member.image.url }}" alt="{{ staff_member.name }}">
+    {% else %}
+        <img src="{% static 'images/doctor_placeholder.png' %}" alt="Placeholder Staff">
+    {% endif %}
+    <h4><a href="{% url 'staff_detail' staff_member.id %}">{{ staff_member.name }}</a></h4>
+    <p>{{ staff_member.designation }} {% if staff_member.specialization %}({{ staff_member.specialization }}){% endif %}</p>
+    <p>{{ staff_member.bio|truncatewords:15 }} <a href="{% url 'staff_detail' staff_member.id %}">Read More</a></p>
+</div>
